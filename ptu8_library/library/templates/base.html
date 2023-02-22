@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static i18n %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}PTU8 Library{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'library/css/style.css' %}">
+</head>
+<body>
+    <header>
+        <ul>
+            <li class="logo">PTU8 Library</li>
+            <li><a href="{% url 'index' %}">Home</a></li>
+        </ul>
+        </header>
+    <main>{% block content %}{% endblock content %}</main>
+    <footer>&copy; 2023 PTU8 Team</footer>
+</body>
+</html>
