@@ -19,6 +19,10 @@ class Author(models.Model):
     
     class Meta:
         ordering = ['last_name', 'first_name']
+    
+    def display_books(self):
+        return ', '.join(book.title for book in self.books.all())
+    display_books.short_description = _('books')
 
 
 class Book(models.Model):
