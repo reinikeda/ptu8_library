@@ -2,9 +2,16 @@ from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from . import models
 
+
+class BookInstanceInline(admin.TabularInline):
+    model = models.BookInstance
+    extra = 0
+
+
 class BookAdmin(admin.ModelAdmin):
     list_display = ('author', 'title', 'display_genre')
     list_display_links = ('title', )
+    inlines = (BookInstanceInline, )
 
 
 class BookInstanceAdmin(admin.ModelAdmin):
