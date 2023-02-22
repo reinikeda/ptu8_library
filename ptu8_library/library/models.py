@@ -42,6 +42,10 @@ class Book(models.Model):
     class Meta:
         ordering = ['title']
 
+    def display_genre(self):
+        return ', '.join(genre.name for genre in self.genre.all())
+    display_genre.short_description = _('genre(s)')
+
 
 class BookInstance(models.Model):
     id = models.UUIDField(
@@ -56,7 +60,7 @@ class BookInstance(models.Model):
         related_name='book_instances',
         verbose_name=_('book'),
     )
-    due_back = models.DateField(_('due_back'), null=True, blank=True, db_index=True)
+    due_back = models.DateField(_('due back'), null=True, blank=True, db_index=True)
 
     LOAN_STATUS = (
         ('m', _('managed')),
