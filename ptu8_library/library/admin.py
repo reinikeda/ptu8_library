@@ -24,6 +24,8 @@ class BookInstanceAdmin(admin.ModelAdmin):
         (_('General'), {'fields': ('id', 'book')}),
         (_('Availability'), {'fields': (('status', 'due_back'),)}),
     )
+    search_fields = ('book__title', 'book__author__last_name', 'id')
+    list_editable = ('due_back', 'status')
 
 
 class AuthorAdmin(admin.ModelAdmin):
