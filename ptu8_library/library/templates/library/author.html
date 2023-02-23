@@ -7,7 +7,7 @@
 {% if author.books.count > 0 %}
     <ul>
         {% for book in author.books.all %}
-        <li>{{ book.title }}</li>
+            <li>{{ book.title }}</li>
         {% endfor %}
     </ul>
 {% endif %}

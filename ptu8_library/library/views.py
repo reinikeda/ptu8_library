@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.views import generic
 from . import models
 
 
@@ -26,3 +27,13 @@ def author(request, author_id):
     return render(request, 'library/author.html', {
         'author': author,
     })
+
+
+class BookListView(generic.ListView):
+    model = models.Book
+    template_name = 'library/book_list.html'
+
+
+class BookDetailView(generic.DetailView):
+    model = models.Book
+    template_name = 'library/book_detail.html'

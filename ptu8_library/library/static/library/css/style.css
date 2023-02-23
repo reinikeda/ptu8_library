@@ -53,6 +53,7 @@ header ul {
     justify-content: flex-start;
     padding-inline-start: 0;
     margin: 8px 0;
+    gap: 16px;
 }
 header ul li {
     display: inline-block;
@@ -60,6 +61,7 @@ header ul li {
 header ul li a {
     padding: 8px 16px;
     display: block;
+    border-radius: 8px;
 }
 .logo {
     color: #fff;

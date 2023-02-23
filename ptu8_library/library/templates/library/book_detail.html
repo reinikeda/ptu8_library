@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}{{ object.title }} in {{ block.super }}{% endblock title %}
+{% block style %}
+.genres { display: flex; flex-direction: row; padding-inline-start: 0; gap: 16px; }
+.genres li { display: inline-block; padding: 0 8px; background-color: #ccf5; border: 1px solid #346; border-radius: 8px; }
+li.genre_prefix { background-color: transparent; border: 0; padding: 0; }
+.book_instances { display: flex; flex-direction: column; padding-inline-start: 0; gap: 8px; }
+.book_instances li { display: flex; flex-direction: row; justify-content: space-between; }
+.status { border: 1px solid #346; padding: 2px 8px; border-radius: 8px; }
+.status_a { background-color: #060; }
+.status_t { background-color: #960; }
+.status_r { background-color: #660; }
+.status_u, .status_m { background-color: #600; }
+{% endblock style %}
+{% block content %}
+<h1>{{ object.title }}</h1>
+<h3>by <a href="{% url 'author' object.author.id %}">{{ object.author }}</a></h3>
+<ul class="genres">
+    <li class="genre_prefix">Genres:</li>
+    {% for genre in object.genre.all %}
+        <li>{{ genre }}</li>
+    {% endfor %}
+</ul>
+<p>{{ object.summary }}</p>
+{% if object.book_instances.count > 0 %}
+    <h3>In PTU8 library these copies are in service:</h3>
+    <ul class="book_instances">
+        {% for bi in object.book_instances.all %}
+            <li><span>ID: {{ bi.id }}</span>
+                {% if bi.due_back %}<span>will be available {{ bi.due_back }}</span>{% endif %}
+                <span class="status status_{{ bi.status }}">{{ bi.get_status_display }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <h3>No copies of this book are available in our library yet</h3>
+{% endif %}
+{% endblock content %}
