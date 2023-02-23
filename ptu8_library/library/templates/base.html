@@ -10,13 +10,13 @@
     <link rel="stylesheet" href="{% static 'library/css/style.css' %}">
 </head>
 <body>
-    <header>
+    <header><div class="container">
         <ul>
             <li class="logo">PTU8 Library</li>
             <li><a href="{% url 'index' %}">Home</a></li>
         </ul>
-        </header>
-    <main>{% block content %}{% endblock content %}</main>
-    <footer>&copy; 2023 PTU8 Team</footer>
+    </div></header>
+    <main><div class="container">{% block content %}{% endblock content %}</div></main>
+    <footer><div class="container"><p>&copy; 2023 PTU8 Team</p></div></footer>
 </body>
 </html>

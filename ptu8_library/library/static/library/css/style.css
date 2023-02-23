@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 0;
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 100%;
     grid-template-rows: 52px calc(100vh - 102px) 50px;
     grid-template-areas: 
         "header"
@@ -23,19 +23,36 @@ header {
     grid-area: header;
     background-color: #123;
     border-bottom: 2px solid #346;
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow: hidden;
 }
 main {
     grid-area: main;
+    overflow: auto;
+    width: 100%;
 }
 footer {
     grid-area: footer;
+    width: 100%;
+    background-color: #123;
+    border-top: 2px solid #346;
+}
+header .container, main .container, footer .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+main .container, footer.container {
+    padding: 0 16px;
 }
 header ul {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: flex-start;
     padding-inline-start: 0;
-    margin: 8px;
+    margin: 8px 0;
 }
 header ul li {
     display: inline-block;
