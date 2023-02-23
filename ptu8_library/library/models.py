@@ -13,6 +13,7 @@ class Genre(models.Model):
 class Author(models.Model):
     first_name = models.CharField(_('first name'), max_length=100, db_index=True)
     last_name = models.CharField(_('last name'), max_length=100, db_index=True)
+    description = models.TextField(_('description'), max_length=4000, null=True, blank=True)
 
     def __str__(self) -> str:
         return f"{self.first_name} {self.last_name}"

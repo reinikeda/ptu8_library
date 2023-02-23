@@ -5,15 +5,7 @@
 {% if authors %}
 <ul>
     {% for author in authors %}
-        <li>{{ author }} ({{ author.books.count }})
-            {% if author.books.count > 0 %}
-            <ul>
-                {% for book in author.books.all %}
-                <li>{{ book.title }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-        </li>
+        <li><a href="{% url 'author' author.id %}">{{ author }}</a> ({{ author.books.count }})</li>
     {% endfor %}
 </ul>
 {% else %}

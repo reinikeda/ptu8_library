@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from . import models
 
 
@@ -19,4 +19,10 @@ def authors(request):
     authors = models.Author.objects.all()
     return render(request, 'library/authors.html', {
         'authors': authors,
+    })
+
+def author(request, author_id):
+    author = get_object_or_404(models.Author, id=author_id)
+    return render(request, 'library/author.html', {
+        'author': author,
     })
