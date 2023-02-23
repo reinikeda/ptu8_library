@@ -13,3 +13,10 @@ def index(request):
         'available_bi_count': available_bi_count,
         'author_count': author_count,
     })
+
+
+def authors(request):
+    authors = models.Author.objects.all()
+    return render(request, 'library/authors.html', {
+        'authors': authors,
+    })
