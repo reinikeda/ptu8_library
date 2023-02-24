@@ -3,11 +3,13 @@
 {% block content %}
 <h1>Books</h1>
 {% if book_list.count > 0 %}
+{% include 'library/includes/paginator_fpnl.html' %}
 <ul>
     {% for book in book_list %}
         <li><a href="{% url 'book' book.pk %}">{{ book }}</a> ({{ book.book_instances.count }})</li>
     {% endfor %}
 </ul>
+{% include 'library/includes/paginator_fpnl.html' %}
 {% else %}
     <p>There are no books in our library yet.</p>
 {% endif %}

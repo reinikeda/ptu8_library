@@ -69,3 +69,21 @@ header ul li a {
     font-weight: 600;
     padding: 4px 16px;
 }
+.paginator {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+.paginator a {
+    border: 1px solid #345;
+    border-radius: 8px;
+    padding: 2px 4px;
+}
+
+.paginator .current {
+    padding: 2px 4px;
+    flex-grow: 1;
+    text-align: center;
+}
