@@ -95,8 +95,3 @@ header ul li a {
 form.search-form {
     margin-bottom: 1rem;
 }
-
-.form-reset {
-    cursor: pointer;
-    padding: 2px 4px;
-}
