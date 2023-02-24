@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from . import models
@@ -17,7 +18,9 @@ def index(request):
 
 
 def authors(request):
-    authors = models.Author.objects.all()
+    paginator = Paginator(models.Author.objects.all(), 4)
+    page_number = request.GET.get('page')
+    authors = paginator.get_page(page_number)
     return render(request, 'library/authors.html', {
         'authors': authors,
     })

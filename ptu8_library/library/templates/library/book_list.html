@@ -9,7 +9,7 @@
         <li><a href="{% url 'book' book.pk %}">{{ book }}</a> ({{ book.book_instances.count }})</li>
     {% endfor %}
 </ul>
-{% include 'library/includes/paginator_fpnl.html' %}
+{% include 'library/includes/paginator_pages.html' %}
 {% else %}
     <p>There are no books in our library yet.</p>
 {% endif %}

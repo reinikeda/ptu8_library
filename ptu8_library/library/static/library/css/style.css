@@ -73,6 +73,7 @@ header ul li a {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    flex-wrap: wrap;
     gap: 8px;
 }
 
@@ -84,6 +85,9 @@ header ul li a {
 
 .paginator .current {
     padding: 2px 4px;
-    flex-grow: 1;
     text-align: center;
+}
+
+.flex-grow-one {
+    flex-grow: 1;
 }

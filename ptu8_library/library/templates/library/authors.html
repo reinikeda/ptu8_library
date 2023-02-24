@@ -3,11 +3,17 @@
 {% block content %}
 <h1>Authors</h1>
 {% if authors %}
+{% with authors as page_obj %}
+    {% include 'library/includes/paginator_fpnl.html' %}
+{% endwith %}
 <ul>
     {% for author in authors %}
         <li><a href="{% url 'author' author.id %}">{{ author }}</a> ({{ author.books.count }})</li>
     {% endfor %}
 </ul>
+{% with authors as page_obj %}
+    {% include 'library/includes/paginator_pages.html' %}
+{% endwith %}
 {% else %}
     <p>There are no authors of any books in our library yet.</p>
 {% endif %}
