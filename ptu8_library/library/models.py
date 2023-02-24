@@ -8,7 +8,7 @@ class Genre(models.Model):
 
     def __str__(self) -> str:
         return self.name
-    
+
 
 class Author(models.Model):
     first_name = models.CharField(_('first name'), max_length=100, db_index=True)
@@ -40,6 +40,7 @@ class Book(models.Model):
         help_text=_('select genre(s) for this book'),
         verbose_name=_('genre(s)')
     )
+    cover = models.ImageField(_("cover"), upload_to='library/covers/', null=True, blank=True)
 
     def __str__(self) -> str:
         return f"{self.author} - {self.title}"

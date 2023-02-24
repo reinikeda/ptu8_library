@@ -1,13 +1,30 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Books in {{ block.super }}{% endblock title %}
+{% block style %}
+ul.book_list { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; gap: 2rem; }
+ul.book_list::after { content: ""; }
+ul.book_list li { display: flex; flex-direction: column; flex-basis: 30%; }
+ul.book_list h2 { font-size: 150%; height: 3.5em; padding: 0 16px; }
+ul.book_list img { align-self: center; width: 100%; }
+{% endblock style %}
 {% block content %}
 <h1>Books</h1>
 {% include 'library/includes/search.html' %}
 {% if book_list.count > 0 %}
 {% include 'library/includes/paginator_fpnl.html' %}
-<ul>
+<ul class="book_list">
     {% for book in book_list %}
-        <li><a href="{% url 'book' book.pk %}">{{ book }}</a> ({{ book.book_instances.count }})</li>
+        <li><a href="{% url 'book' book.pk %}">
+            {% if book.cover %}
+                <img src="{{ book.cover.url }}">
+            {% else %}
+                <img src="{% static 'library/img/default_cover_square.png' %}">
+            {% endif %}
+            <h2>{{ book.title }}</h2>
+        </a>
+        <h3>by {{ book.author }}</h3>
+        <p>instances: {{ book.book_instances.count }}</p></li>
     {% endfor %}
 </ul>
 {% include 'library/includes/paginator_pages.html' %}
