@@ -91,3 +91,12 @@ header ul li a {
 .flex-grow-one {
     flex-grow: 1;
 }
+
+form.search-form {
+    margin-bottom: 1rem;
+}
+
+.form-reset {
+    cursor: pointer;
+    padding: 2px 4px;
+}

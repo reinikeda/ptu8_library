@@ -4,7 +4,7 @@
             {% if page_obj.number == page %}
                 <span class="current">{{ page }}</span>
             {% else %}
-                <a href="?page={{ page }}">{{ page }}</a>
+                <a href="?page={{ page }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ page }}</a>
             {% endif %}
         {% endfor %}
     </div>

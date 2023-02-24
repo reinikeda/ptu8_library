@@ -2,6 +2,7 @@
 {% block title %}Authors in {{ block.super }}{% endblock title %}
 {% block content %}
 <h1>Authors</h1>
+{% include 'library/includes/search.html' %}
 {% if authors %}
 {% with authors as page_obj %}
     {% include 'library/includes/paginator_fpnl.html' %}
@@ -15,6 +16,6 @@
     {% include 'library/includes/paginator_pages.html' %}
 {% endwith %}
 {% else %}
-    <p>There are no authors of any books in our library yet.</p>
+    <p>There are no authors matching your query in our library yet.</p>
 {% endif %}
 {% endblock content %}

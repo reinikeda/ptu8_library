@@ -2,6 +2,7 @@
 {% block title %}Books in {{ block.super }}{% endblock title %}
 {% block content %}
 <h1>Books</h1>
+{% include 'library/includes/search.html' %}
 {% if book_list.count > 0 %}
 {% include 'library/includes/paginator_fpnl.html' %}
 <ul>
@@ -11,6 +12,6 @@
 </ul>
 {% include 'library/includes/paginator_pages.html' %}
 {% else %}
-    <p>There are no books in our library yet.</p>
+    <p>There are no books matching your query in our library yet.</p>
 {% endif %}
 {% endblock content %}

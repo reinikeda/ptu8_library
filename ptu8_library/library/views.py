@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
@@ -18,7 +19,13 @@ def index(request):
 
 
 def authors(request):
-    paginator = Paginator(models.Author.objects.all(), 4)
+    queryset = models.Author.objects
+    query = request.GET.get('search')
+    if query:
+        queryset = queryset.filter(
+            Q(first_name__istartswith=query) | Q(last_name__istartswith=query)
+        )
+    paginator = Paginator(queryset.all(), 4)
     page_number = request.GET.get('page')
     authors = paginator.get_page(page_number)
     return render(request, 'library/authors.html', {
@@ -34,8 +41,18 @@ def author(request, author_id):
 
 class BookListView(generic.ListView):
     model = models.Book
-    paginate_by = 4
+    paginate_by = 2
     template_name = 'library/book_list.html'
+
+    def get_queryset(self):
+        qs =  super().get_queryset()
+        query = self.request.GET.get('search')
+        if query:
+            qs = qs.filter(
+                Q(title__icontains=query) |
+                Q(author__last_name__startswith=query)
+            )
+        return qs
 
 
 class BookDetailView(generic.DetailView):
