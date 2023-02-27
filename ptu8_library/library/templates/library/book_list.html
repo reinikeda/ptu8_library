@@ -31,4 +31,10 @@ ul.book_list img { align-self: center; width: 100%; }
 {% else %}
     <p>There are no books matching your query in our library yet.</p>
 {% endif %}
+<h2>Filter by Genre</h2>
+<ul class="genres">
+    {% for genre in genres %}
+    <li><a href="?genre_id={{ genre.id }}" {% if current_genre.id == genre.id %} class="active"{% endif %}>{{ genre }}</a></li>
+    {% endfor %}
+</ul>
 {% endblock content %}

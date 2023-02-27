@@ -95,3 +95,30 @@ header ul li a {
 form.search-form {
     margin-bottom: 1rem;
 }
+
+.genres { 
+    display: flex; 
+    flex-direction: row; 
+    padding-inline-start: 0; 
+    gap: 16px;
+    flex-wrap: wrap;
+}
+.genres li { 
+    display: inline-block; 
+    padding: 0 8px; 
+    background-color: #ccf5; 
+    border: 1px solid #346; 
+    border-radius: 8px; 
+}
+li.genre_prefix { 
+    background-color: transparent; 
+    border: 0; 
+    padding: 0; 
+}
+.genres a {
+    background-color: transparent;
+}
+
+.genres .active {
+    color: #ccc;
+}

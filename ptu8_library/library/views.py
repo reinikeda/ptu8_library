@@ -46,6 +46,9 @@ class BookListView(generic.ListView):
 
     def get_queryset(self):
         qs =  super().get_queryset()
+        genre_id = self.request.GET.get('genre_id')
+        if genre_id:
+            qs = qs.filter(genre=genre_id)
         query = self.request.GET.get('search')
         if query:
             qs = qs.filter(
@@ -53,6 +56,16 @@ class BookListView(generic.ListView):
                 Q(author__last_name__startswith=query)
             )
         return qs
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        genres = models.Genre.objects.all()
+        context.update({'genres': genres})
+        genre_id = self.request.GET.get('genre_id')
+        if genre_id:
+            genre = get_object_or_404(models.Genre, id=genre_id)
+            context.update({'current_genre': genre})
+        return context
 
 
 class BookDetailView(generic.DetailView):

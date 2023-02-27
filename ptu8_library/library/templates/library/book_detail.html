@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}{{ object.title }} in {{ block.super }}{% endblock title %}
 {% block style %}
-.genres { display: flex; flex-direction: row; padding-inline-start: 0; gap: 16px; }
-.genres li { display: inline-block; padding: 0 8px; background-color: #ccf5; border: 1px solid #346; border-radius: 8px; }
-li.genre_prefix { background-color: transparent; border: 0; padding: 0; }
 .book_instances { display: flex; flex-direction: column; padding-inline-start: 0; gap: 8px; }
 .book_instances li { display: flex; flex-direction: row; justify-content: space-between; }
 .status { border: 1px solid #346; padding: 2px 8px; border-radius: 8px; }
