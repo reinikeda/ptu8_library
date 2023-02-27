@@ -5,7 +5,7 @@ body {
     padding: 0;
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 52px calc(100vh - 102px) 50px;
+    grid-template-rows: 62px calc(100vh - 112px) 50px;
     grid-template-areas: 
         "header"
         "main"
@@ -54,9 +54,15 @@ header ul {
     padding-inline-start: 0;
     margin: 8px 0;
     gap: 16px;
+    overflow-x: auto;
 }
 header ul li {
     display: inline-block;
+}
+header .user-info {
+    flex-grow: 1;
+    padding: 8px;
+    text-align: right;
 }
 header ul li a {
     padding: 8px 16px;

@@ -17,6 +17,16 @@
             <li><a href="{% url 'index' %}">Home</a></li>
             <li><a href="{% url 'authors' %}">Authors</a></li>
             <li><a href="{% url 'books' %}">Books</a></li>
+            {% if request.user.is_authenticated %}
+                <span class="user-info">{{ request.user }}</span>
+                {% if request.user.is_superuser or request.user.is_staff %}
+                    <li><a href="{% url 'admin:index' %}">Admin</a></li>
+                {% endif %}
+                <li><a href="{% url 'logout' %}">Log out</a></li>
+            {% else %}
+                <span class="user-info"></span>
+                <li><a href="{% url 'login' %}{% if request.path != '/accounts/logout/' %}?next={{ request.path }}{% endif %}">Log in</a></li>
+            {% endif %}
         </ul>
     </div></header>
     <main><div class="container">{% block content %}{% endblock content %}</div></main>
