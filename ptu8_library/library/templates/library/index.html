@@ -9,5 +9,6 @@
     <li>{{ book_count }} distinct books</li>
     <li>{{ book_instance_count }} total book copies</li>
     <li>{{ available_bi_count }} available book copies to take</li>
+    <li>Your visits since last logoff: {{ request.session.visit_count }}</li>
 </ul>
 {% endblock content %}

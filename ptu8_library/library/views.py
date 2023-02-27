@@ -10,6 +10,7 @@ def index(request):
     book_instance_count = models.BookInstance.objects.count()
     available_bi_count = models.BookInstance.objects.filter(status='a').count()
     author_count = models.Author.objects.count()
+    request.session['visit_count'] = request.session.get('visit_count', 0) + 1
     return render(request, 'library/index.html', {
         'book_count': book_count,
         'book_instance_count': book_instance_count,
