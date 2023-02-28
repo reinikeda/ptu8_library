@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}My books in {{ block.super }}{% endblock title %}
+{% block content %}
+<h1>My Books</h1>
+{% if bookinstance_list %}
+    <table>
+        <thead>
+            <th>Book</th>
+            <th>Status</th>
+            <th>To be returned</th>
+        </thead>
+        <tbody>
+        {% for book_instance in bookinstance_list %}
+            <tr {% if book_instance.is_overdue %}class="overdue"{% endif %}>
+                <td>{{ book_instance.book }}</td>
+                <td class="text-center">{{ book_instance.get_status_display }}</td>
+                <td class="text-center">{{ book_instance.due_back }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>You do not have any books yet.</p>
+{% endif %}
+{% endblock content %}

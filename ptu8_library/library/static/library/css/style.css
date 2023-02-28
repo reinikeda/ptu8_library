@@ -128,3 +128,30 @@ li.genre_prefix {
 .genres .active {
     color: #ccc;
 }
+
+table {
+    width: 100%;
+    min-width: 500px;
+    overflow-x: auto;
+}
+
+.overdue {
+    background-color: #f007;
+}
+
+table tbody tr:hover:not(.overdue) {
+    background-color: #fff5;
+}
+
+table tbody tr.overdue:hover {
+    background-color: #f009;
+}
+
+table td {
+    padding: 4px 8px;
+}
+
+.text-center {
+    text-align: center;
+}
+
