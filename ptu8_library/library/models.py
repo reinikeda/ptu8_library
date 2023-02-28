@@ -1,6 +1,10 @@
+from datetime import date
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 import uuid
+
+User = get_user_model()
 
 
 class Genre(models.Model):
@@ -77,9 +81,22 @@ class BookInstance(models.Model):
     )
 
     status = models.CharField(_('status'), max_length=1, choices=LOAN_STATUS, default='a')
+    reader = models.ForeignKey(
+        User, 
+        verbose_name=_("reader"), 
+        on_delete=models.SET_NULL,
+        related_name='book_instances',
+        null=True, blank=True,
+    )
 
     def __str__(self) -> str:
         return f"{self.id}: {self.book}"
+    
+    @property
+    def is_overdue(self):
+        if self.due_back:
+            return self.due_back < date.today()
+        return False
     
     class Meta:
         ordering = ['due_back']

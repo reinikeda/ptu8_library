@@ -18,13 +18,13 @@ class BookAdmin(admin.ModelAdmin):
 
 
 class BookInstanceAdmin(admin.ModelAdmin):
-    list_display = ('id', 'book', 'status', 'due_back')
+    list_display = ('id', 'book', 'status', 'is_overdue', 'due_back', 'reader')
     list_filter = ('status', 'due_back')
     fieldsets = (
         (_('General'), {'fields': ('id', 'book')}),
-        (_('Availability'), {'fields': (('status', 'due_back'),)}),
+        (_('Availability'), {'fields': (('status', 'due_back', 'reader'), )}),
     )
-    search_fields = ('book__title', 'book__author__last_name', 'id')
+    search_fields = ('book__title', 'book__author__last_name', 'id', 'reader__last_name')
     list_editable = ('due_back', 'status')
 
 
