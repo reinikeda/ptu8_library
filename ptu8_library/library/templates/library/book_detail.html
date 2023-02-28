@@ -9,6 +9,7 @@
 .status_r { background-color: #660; }
 .status_u, .status_m { background-color: #600; }
 .book-cover { width: 25%; float: right; margin-left: 16px; }
+.review-title { border-bottom: 2px solid #345; }
 @media screen and (min-width: 481px) and (max-width: 768px) {
     .book-cover { width: 50%; }
 }
@@ -41,5 +42,23 @@
     </ul>
 {% else %}
     <h3>No copies of this book are available in our library yet</h3>
+{% endif %}
+<h2 class="review-title">Reviews</h2>
+<form method="post" action="{{ request.path }}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">post review</button>
+</form>
+{% if object.reviews %}
+    <ul class="reviews">
+        {% for review in object.reviews.all %}
+            <li>
+                <h4>{{ review.reviewer }} <span class="float-right"> {{ review.created_at }}</span></h4>
+                <p>{{ review.content }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <h3>No reviews for this book. Be first!</h3>
 {% endif %}
 {% endblock content %}

@@ -101,3 +101,27 @@ class BookInstance(models.Model):
     
     class Meta:
         ordering = ['due_back']
+
+
+class BookReview(models.Model):
+    book = models.ForeignKey(
+        Book, 
+        verbose_name=_("book"), 
+        on_delete=models.CASCADE,
+        related_name='reviews',
+    )
+    reviewer = models.ForeignKey(
+        User, 
+        verbose_name=_("reviewer"), 
+        on_delete=models.SET_NULL,
+        related_name='book_reviews',
+        null=True, blank=True,
+    )
+    created_at = models.DateTimeField(_("created at"), auto_now_add=True, db_index=True)
+    content = models.TextField(_("content"), max_length=4000)
+
+    def __str__(self) -> str:
+        return f"{self.reviewer} - {self.created_at}"
+
+    class Meta:
+        ordering = ['-created_at']

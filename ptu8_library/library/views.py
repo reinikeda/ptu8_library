@@ -1,8 +1,11 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
+from django.urls import reverse
+from . forms import BookReviewForm
 from . import models
 
 
@@ -70,9 +73,34 @@ class BookListView(generic.ListView):
         return context
 
 
-class BookDetailView(generic.DetailView):
+class BookDetailView(generic.edit.FormMixin, generic.DetailView):
     model = models.Book
     template_name = 'library/book_detail.html'
+    form_class = BookReviewForm
+
+    def get_success_url(self) -> str:
+        return reverse('book', kwargs={'pk': self.get_object().id})
+
+    def post(self, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+        
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['book'] = self.get_object()
+        initial['reviewer'] = self.request.user
+        return initial
+    
+    def form_valid(self, form):
+        form.instance.book = self.object
+        form.instance.reviewer = self.request.user
+        form.save()
+        messages.success(self.request, 'Review posted successfully')
+        return super().form_valid(form)
 
 
 class UserBookInstnceListView(LoginRequiredMixin, generic.ListView):
