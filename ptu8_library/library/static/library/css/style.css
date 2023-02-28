@@ -155,3 +155,50 @@ table td {
     text-align: center;
 }
 
+form p {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow-x: auto;
+    justify-content: space-between;
+    gap: 16px;
+    width: 400px;
+    max-width: 100%;
+}
+
+form p input {
+    width: 50%;
+}
+
+form p small {
+    text-align: center;
+    width: 100%;
+    border-bottom: 1px solid #345;
+}
+
+.alert {
+    border: 1px solid #345;
+    border-radius: 8px;
+    padding: 4px 16px;
+    margin: 8px 0;
+}
+
+.alert-success {
+    background-color: #0f07;
+}
+
+.alert-info {
+    background-color: #06f7;
+}
+
+.alert-debug {
+    background-color: #fff7;
+}
+
+.alert-error {
+    background-color: #f007;
+}
+
+.alert-warning {
+    background-color: #fc07;
+}
