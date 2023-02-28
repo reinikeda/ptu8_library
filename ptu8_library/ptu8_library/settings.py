@@ -34,8 +34,12 @@ LOGIN_REDIRECT_URL = reverse_lazy('index')
 # Application definition
 
 INSTALLED_APPS = [
+    # musu projekto apps'ai
     'library',
     'user_profile',
+    # 3 saliu apps'ai
+    'tinymce',
+    # Django apps'ai
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

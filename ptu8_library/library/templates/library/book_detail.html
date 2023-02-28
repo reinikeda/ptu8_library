@@ -8,9 +8,19 @@
 .status_t { background-color: #960; }
 .status_r { background-color: #660; }
 .status_u, .status_m { background-color: #600; }
+.book-cover { width: 25%; float: right; margin-left: 16px; }
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .book-cover { width: 50%; }
+}
+@media screen and (max-width: 480px) {
+    .book-cover { width: 100%; margin: 0; float: none; }
+}
 {% endblock style %}
 {% block content %}
 <h1>{{ object.title }}</h1>
+{% if object.cover %}
+<img src="{{ object.cover.url }}" class="book-cover">
+{% endif %}
 <h3>by <a href="{% url 'author' object.author.id %}">{{ object.author }}</a></h3>
 <ul class="genres">
     <li class="genre_prefix">Genres:</li>
@@ -18,7 +28,7 @@
         <li>{{ genre }}</li>
     {% endfor %}
 </ul>
-<p>{{ object.summary }}</p>
+{{ object.summary|safe }}
 {% if object.book_instances.count > 0 %}
     <h3>In PTU8 library these copies are in service:</h3>
     <ul class="book_instances">
