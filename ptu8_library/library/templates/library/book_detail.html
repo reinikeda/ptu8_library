@@ -53,7 +53,8 @@
     <ul class="reviews">
         {% for review in object.reviews.all %}
             <li>
-                <h4>{{ review.reviewer }} <span class="float-right"> {{ review.created_at }}</span></h4>
+                <h4><a href="{% url 'profile_detail' review.reviewer.username %}">{{ review.reviewer }}</a>
+                    <span class="float-right"> {{ review.created_at }}</span></h4>
                 <p>{{ review.content }}</p>
             </li>
         {% endfor %}

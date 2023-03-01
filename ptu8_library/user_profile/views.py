@@ -1,10 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_protect
-from . import forms
+from . import forms, models
 
 
 User = get_user_model()
@@ -43,6 +43,10 @@ def detail_active(request):
         'object': request.user.profile
     })
 
+def detail(request, username):
+    return render(request, 'user_profile/detail.html', {
+        'object': get_object_or_404(models.Profile, user__username=username)
+    })
 
 @login_required
 def update(request):
