@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Updating {{ block.super }} profile{% endblock title %}
+{% block style %}
+.profile_form {
+    padding-inline-start: 0;
+    list-style-type: none;
+}
+{% endblock style %}
+{% block content %}
+<h1>Update your reader profile</h1>
+<form method="post" action="{{ request.path }}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    <ul class="profile_form">{{ profile_form.as_ul }}</ul>
+    <button type="submit">Update</button>
+</form>
+{% endblock content %}

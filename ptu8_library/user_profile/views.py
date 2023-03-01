@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_protect
+from . import forms
 
 
 User = get_user_model()
@@ -40,4 +41,23 @@ def register(request):
 def detail_active(request):
     return render(request, 'user_profile/detail.html', {
         'object': request.user.profile
+    })
+
+
+@login_required
+def update(request):
+    if request.method == "POST":
+        user_form = forms.UserUpdateForm(request.POST, instance=request.user)
+        profile_form = forms.ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, "Your profile was successfully updated.")
+            return redirect('profile_detail_active')
+    else:
+        user_form = forms.UserUpdateForm(instance=request.user)
+        profile_form = forms.ProfileUpdateForm(instance=request.user.profile)
+    return render(request, 'user_profile/update.html', {
+        'user_form': user_form,
+        'profile_form': profile_form,
     })
