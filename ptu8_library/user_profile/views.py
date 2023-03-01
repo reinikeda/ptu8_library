@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_protect
@@ -34,3 +35,9 @@ def register(request):
             messages.success(request, f'user {username} has been succesfully registered. You can log in now.')
             return redirect(reverse_lazy('login'))
     return render(request, 'user_profile/register.html')
+
+@login_required
+def detail_active(request):
+    return render(request, 'user_profile/detail.html', {
+        'object': request.user.profile
+    })

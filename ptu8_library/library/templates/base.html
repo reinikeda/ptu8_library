@@ -18,7 +18,7 @@
             <li><a href="{% url 'authors' %}">Authors</a></li>
             <li><a href="{% url 'books' %}">Books</a></li>
             {% if request.user.is_authenticated %}
-                <span class="user-info">{{ request.user }}</span>
+                <li class="user-info"><a href="{% url 'profile_detail_active' %}">{{ request.user }}</a></li>
                 <li><a href="{% url 'user_bookinstances' %}">My Books</a></li>
                 {% if request.user.is_superuser or request.user.is_staff %}
                     <li><a href="{% url 'admin:index' %}">Admin</a></li>
