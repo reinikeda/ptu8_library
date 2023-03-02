@@ -4,7 +4,7 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
-from django.urls import reverse
+from django.urls import reverse_lazy
 from . forms import BookReviewForm
 from . import models
 
@@ -79,7 +79,7 @@ class BookDetailView(generic.edit.FormMixin, generic.DetailView):
     form_class = BookReviewForm
 
     def get_success_url(self) -> str:
-        return reverse('book', kwargs={'pk': self.get_object().id})
+        return reverse_lazy('book', kwargs={'pk': self.get_object().id})
 
     def post(self, *args, **kwargs):
         self.object = self.get_object()
@@ -112,3 +112,21 @@ class UserBookInstnceListView(LoginRequiredMixin, generic.ListView):
         qs = super().get_queryset()
         qs = qs.filter(reader=self.request.user)
         return qs
+
+
+class UserBookInstanceCreateView(LoginRequiredMixin, generic.CreateView):
+    model = models.BookInstance
+    template_name = 'library/user_bookinstance_create.html'
+    fields = ('book', 'due_back', 'status')
+    success_url = reverse_lazy('user_bookinstances')
+
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['status'] = 'r'
+        return initial
+
+    def form_valid(self, form):
+        form.instance.reader = self.request.user
+        form.instance.status = 'r'
+        messages.success(self.request, f'{form.instance.book} successfully reserved until {form.instance.due_back}.')
+        return super().form_valid(form)

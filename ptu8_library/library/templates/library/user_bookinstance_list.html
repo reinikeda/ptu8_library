@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}My books in {{ block.super }}{% endblock title %}
 {% block content %}
-<h1>My Books</h1>
+<h1>My Books <a href="{% url 'user_bookinstance_create' %}" class="float-right">Reserve New Book</a></h1>
 {% if bookinstance_list %}
     <table>
         <thead>
