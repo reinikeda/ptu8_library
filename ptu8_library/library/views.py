@@ -1,3 +1,4 @@
+from datetime import date, timedelta
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.core.paginator import Paginator
@@ -5,7 +6,7 @@ from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.urls import reverse_lazy
-from . forms import BookReviewForm
+from . forms import BookReviewForm, UserBookInstanceCreateForm, UserBookInstanceUpdateForm
 from . import models
 
 
@@ -117,7 +118,7 @@ class UserBookInstnceListView(LoginRequiredMixin, generic.ListView):
 class UserBookInstanceCreateView(LoginRequiredMixin, generic.CreateView):
     model = models.BookInstance
     template_name = 'library/user_bookinstance_create.html'
-    fields = ('book', 'due_back', 'status')
+    form_class = UserBookInstanceCreateForm
     success_url = reverse_lazy('user_bookinstances')
 
     def get_initial(self):
@@ -125,6 +126,7 @@ class UserBookInstanceCreateView(LoginRequiredMixin, generic.CreateView):
         initial['status'] = 'r'
         if self.request.GET.get('book_id'):
             initial['book'] = get_object_or_404(models.Book, id=self.request.GET.get('book_id'))
+        initial['due_back'] = date.today() + timedelta(days=14)
         return initial
 
     def form_valid(self, form):
@@ -137,7 +139,7 @@ class UserBookInstanceCreateView(LoginRequiredMixin, generic.CreateView):
 class UserBookInstanceUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     model = models.BookInstance
     template_name = 'library/user_bookinstance_update.html'
-    fields = ('book', 'due_back', 'status')
+    form_class = UserBookInstanceUpdateForm
     success_url = reverse_lazy('user_bookinstances')
 
     def form_valid(self, form):

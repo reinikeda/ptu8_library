@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block title %}Managing book at {{ block.super }}{% endblock title %}
 {% block content %}
-<h1>Take or Extend a book</h1>
+<h1>{% if form.instance.status == 'r' %}Take{% else %}Extend{% endif %} {{ form.instance.book }}</h1>
 <form method="post" action="{{ request.path }}">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Take / Extend</button>
+    <button type="submit">{% if form.instance.status == 'r' %}Take{% else %}Extend{% endif %}</button>
 </form>
 {% endblock content %}
