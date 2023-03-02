@@ -18,7 +18,7 @@
 }
 {% endblock style %}
 {% block content %}
-<h1>{{ object.title }}</h1>
+<h1>{{ object.title }} {% if request.user.is_authenticated %}<a href="{% url 'user_bookinstance_create' %}?book_id={{ object.id }}" class="float-right">Reserve</a>{% endif %}</h1>
 {% if object.cover %}
 <img src="{{ object.cover.url }}" class="book-cover">
 {% endif %}

@@ -123,6 +123,8 @@ class UserBookInstanceCreateView(LoginRequiredMixin, generic.CreateView):
     def get_initial(self):
         initial = super().get_initial()
         initial['status'] = 'r'
+        if self.request.GET.get('book_id'):
+            initial['book'] = get_object_or_404(models.Book, id=self.request.GET.get('book_id'))
         return initial
 
     def form_valid(self, form):
