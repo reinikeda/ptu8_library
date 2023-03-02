@@ -148,3 +148,16 @@ class UserBookInstanceUpdateView(LoginRequiredMixin, UserPassesTestMixin, generi
     
     def test_func(self):
         return self.get_object().reader == self.request.user
+
+
+class UserBookInstanceDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+    model = models.BookInstance
+    template_name = 'library/user_bookinstance_delete.html'
+    success_url = reverse_lazy('user_bookinstances')
+
+    def test_func(self):
+        return self.get_object().reader == self.request.user
+
+    def form_valid(self, form):
+        messages.success(self.request, 'The book was returned to library.')
+        return super().form_valid(form)

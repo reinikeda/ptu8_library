@@ -18,6 +18,7 @@
                 <td class="text-center">{{ book_instance.due_back }}</td>
                 <td>{% if book_instance.status == 'r' or book_instance.status == 't' %}
                     <a href="{% url 'user_bookinstance_update' book_instance.pk %}">Take or Extend</a>
+                    <a href="{% url 'user_bookinstance_delete' book_instance.pk %}">Return</a>
                     {% endif %}</td>
             </tr>
         {% endfor %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Managing book at {{ block.super }}{% endblock title %}
+{% block content %}
+<h1>Return the book</h1>
+<p>Please confirm you are returning {{ object.book }}</p>
+<form method="post" action="{{ request.path }}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Confirm Return</button>
+    <a href="{% url 'user_bookinstances' %}">change my mind</a>
+</form>
+{% endblock content %}

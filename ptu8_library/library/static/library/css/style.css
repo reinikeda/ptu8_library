@@ -230,3 +230,7 @@ form p small {
     margin-right: 1rem;
     border: 4px solid #345;
 }
+
+table a, h1 a, h2 a, h3 a {
+    padding: 0 4px; border-radius: 0.5rem;
+}
