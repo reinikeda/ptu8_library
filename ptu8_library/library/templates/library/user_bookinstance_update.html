@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Managing book at {{ block.super }}{% endblock title %}
+{% block content %}
+<h1>Take or Extend a book</h1>
+<form method="post" action="{{ request.path }}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Take / Extend</button>
+</form>
+{% endblock content %}

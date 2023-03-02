@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -132,3 +132,19 @@ class UserBookInstanceCreateView(LoginRequiredMixin, generic.CreateView):
         form.instance.status = 'r'
         messages.success(self.request, f'{form.instance.book} successfully reserved until {form.instance.due_back}.')
         return super().form_valid(form)
+
+
+class UserBookInstanceUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
+    model = models.BookInstance
+    template_name = 'library/user_bookinstance_update.html'
+    fields = ('book', 'due_back', 'status')
+    success_url = reverse_lazy('user_bookinstances')
+
+    def form_valid(self, form):
+        form.instance.reader = self.request.user
+        form.instance.status = 't'
+        messages.success(self.request, f'{form.instance.book} successfully taken. Return due {form.instance.due_back}.')
+        return super().form_valid(form)
+    
+    def test_func(self):
+        return self.get_object().reader == self.request.user

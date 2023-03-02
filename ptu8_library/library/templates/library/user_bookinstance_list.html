@@ -8,6 +8,7 @@
             <th>Book</th>
             <th>Status</th>
             <th>To be returned</th>
+            <th>Actions</th>
         </thead>
         <tbody>
         {% for book_instance in bookinstance_list %}
@@ -15,6 +16,9 @@
                 <td>{{ book_instance.book }}</td>
                 <td class="text-center">{{ book_instance.get_status_display }}</td>
                 <td class="text-center">{{ book_instance.due_back }}</td>
+                <td>{% if book_instance.status == 'r' or book_instance.status == 't' %}
+                    <a href="{% url 'user_bookinstance_update' book_instance.pk %}">Take or Extend</a>
+                    {% endif %}</td>
             </tr>
         {% endfor %}
         </tbody>
