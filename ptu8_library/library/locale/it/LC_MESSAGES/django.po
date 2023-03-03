@@ -1,0 +1,223 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-03 09:01+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: library/admin.py:24
+msgid "General"
+msgstr ""
+
+#: library/admin.py:25
+msgid "Availability"
+msgstr ""
+
+#: library/models.py:12
+msgid "name"
+msgstr "nome"
+
+#: library/models.py:18
+msgid "genre"
+msgstr ""
+
+#: library/models.py:19
+msgid "genres"
+msgstr ""
+
+#: library/models.py:23
+msgid "first name"
+msgstr "nome"
+
+#: library/models.py:24
+msgid "last name"
+msgstr "cognome"
+
+#: library/models.py:25
+msgid "description"
+msgstr "descrizione"
+
+#: library/models.py:32 library/models.py:46
+msgid "author"
+msgstr "l'autore"
+
+#: library/models.py:33 library/templates/base.html:18
+#: library/templates/library/index.html:8
+msgid "authors"
+msgstr "autori"
+
+#: library/models.py:37 library/models.py:62 library/templates/base.html:19
+msgid "books"
+msgstr "libri"
+
+#: library/models.py:41
+msgid "title"
+msgstr "titolo"
+
+#: library/models.py:48
+msgid "summary"
+msgstr ""
+
+#: library/models.py:51
+msgid "select genre(s) for this book"
+msgstr ""
+
+#: library/models.py:52 library/models.py:66
+msgid "genre(s)"
+msgstr ""
+
+#: library/models.py:54
+msgid "cover"
+msgstr ""
+
+#: library/models.py:61 library/models.py:80 library/models.py:119
+msgid "book"
+msgstr "libro"
+
+#: library/models.py:71
+msgid "ID"
+msgstr "ID"
+
+#: library/models.py:74
+msgid "Unique ID for a book copy"
+msgstr ""
+
+#: library/models.py:82
+msgid "due back"
+msgstr ""
+
+#: library/models.py:85
+msgid "managed"
+msgstr ""
+
+#: library/models.py:86
+msgid "reserved"
+msgstr "riservata"
+
+#: library/models.py:87
+msgid "taken"
+msgstr "preso"
+
+#: library/models.py:88
+msgid "available"
+msgstr "disponibile"
+
+#: library/models.py:89
+msgid "unavailable"
+msgstr "non-disponibile"
+
+#: library/models.py:92
+msgid "status"
+msgstr ""
+
+#: library/models.py:95
+msgid "reader"
+msgstr ""
+
+#: library/models.py:112
+msgid "book instance"
+msgstr ""
+
+#: library/models.py:113
+msgid "book instances"
+msgstr ""
+
+#: library/models.py:125
+msgid "reviewer"
+msgstr ""
+
+#: library/models.py:130
+msgid "created at"
+msgstr ""
+
+#: library/models.py:131
+msgid "content"
+msgstr ""
+
+#: library/models.py:138
+msgid "book review"
+msgstr ""
+
+#: library/models.py:139
+msgid "book reviews"
+msgstr ""
+
+#: library/templates/base.html:8 library/templates/base.html:16
+msgid "library"
+msgstr ""
+
+#: library/templates/base.html:17
+msgid "home"
+msgstr ""
+
+#: library/templates/base.html:22
+msgid "by books"
+msgstr ""
+
+#: library/templates/base.html:24
+msgid "admin"
+msgstr ""
+
+#: library/templates/base.html:26
+msgid "log out"
+msgstr ""
+
+#: library/templates/base.html:29
+msgid "log in"
+msgstr ""
+
+#: library/templates/base.html:30
+msgid "sign up"
+msgstr ""
+
+#: library/templates/base.html:43
+msgid "team"
+msgstr ""
+
+#: library/templates/library/index.html:3
+msgid "welcome to"
+msgstr ""
+
+#: library/templates/library/index.html:5
+msgid "welcome"
+msgstr ""
+
+#: library/templates/library/index.html:6
+msgid "In our library you can find"
+msgstr ""
+
+#: library/templates/library/index.html:9
+msgid "distinct books"
+msgstr ""
+
+#: library/templates/library/index.html:10
+msgid "total book copies"
+msgstr ""
+
+#: library/templates/library/index.html:11
+msgid "available book copies to take"
+msgstr ""
+
+#: library/templates/library/index.html:12
+msgid "Your visits since last logoff"
+msgstr ""
+
+#: library/views.py:104
+msgid "Review posted successfully"
+msgstr ""
+
+#: library/views.py:165
+msgid "The book was returned to library."
+msgstr ""

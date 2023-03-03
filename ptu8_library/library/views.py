@@ -6,6 +6,7 @@ from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
 from . forms import BookReviewForm, UserBookInstanceCreateForm, UserBookInstanceUpdateForm
 from . import models
 
@@ -100,7 +101,7 @@ class BookDetailView(generic.edit.FormMixin, generic.DetailView):
         form.instance.book = self.object
         form.instance.reviewer = self.request.user
         form.save()
-        messages.success(self.request, 'Review posted successfully')
+        messages.success(self.request, _('Review posted successfully'))
         return super().form_valid(form)
 
 
@@ -132,7 +133,7 @@ class UserBookInstanceCreateView(LoginRequiredMixin, generic.CreateView):
     def form_valid(self, form):
         form.instance.reader = self.request.user
         form.instance.status = 'r'
-        messages.success(self.request, f'{form.instance.book} successfully reserved until {form.instance.due_back}.')
+        messages.success(self.request, f'{form.instance.book} {_("successfully reserved until")} {form.instance.due_back}.')
         return super().form_valid(form)
 
 
@@ -145,7 +146,7 @@ class UserBookInstanceUpdateView(LoginRequiredMixin, UserPassesTestMixin, generi
     def form_valid(self, form):
         form.instance.reader = self.request.user
         form.instance.status = 't'
-        messages.success(self.request, f'{form.instance.book} successfully taken. Return due {form.instance.due_back}.')
+        messages.success(self.request, f'{form.instance.book} {_("successfully taken. Return due")} {form.instance.due_back}.')
         return super().form_valid(form)
     
     def test_func(self):
@@ -161,5 +162,5 @@ class UserBookInstanceDeleteView(LoginRequiredMixin, UserPassesTestMixin, generi
         return self.get_object().reader == self.request.user
 
     def form_valid(self, form):
-        messages.success(self.request, 'The book was returned to library.')
+        messages.success(self.request, _('The book was returned to library.'))
         return super().form_valid(form)

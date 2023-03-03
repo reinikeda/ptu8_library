@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% load i18n %}
-{% block title %}Welcome to {{ block.super }}{% endblock title %}
+{% block title %}{% trans "welcome to"|capfirst %} {{ block.super }}{% endblock title %}
 {% block content %}
-<h1>Welcome!</h1>
-<p>In our library you can find:</p>
+<h1>{% trans "welcome"|capfirst %}!</h1>
+<p>{% trans "In our library you can find" %}:</p>
 <ul>
-    <li>{{ author_count }} authors</li>
-    <li>{{ book_count }} distinct books</li>
-    <li>{{ book_instance_count }} total book copies</li>
-    <li>{{ available_bi_count }} available book copies to take</li>
-    <li>Your visits since last logoff: {{ request.session.visit_count }}</li>
+    <li>{{ author_count }} {% trans "authors" %}</li>
+    <li>{{ book_count }} {% trans "distinct books" %}</li>
+    <li>{{ book_instance_count }} {% trans "total book copies" %}</li>
+    <li>{{ available_bi_count }} {% trans "available book copies to take" %}</li>
+    <li>{% trans "Your visits since last logoff" %}: {{ request.session.visit_count }}</li>
 </ul>
 {% endblock content %}

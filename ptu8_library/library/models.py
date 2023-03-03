@@ -13,6 +13,10 @@ class Genre(models.Model):
 
     def __str__(self) -> str:
         return self.name
+    
+    class Meta:
+        verbose_name = _('genre')
+        verbose_name_plural = _('genres')
 
 
 class Author(models.Model):
@@ -25,6 +29,8 @@ class Author(models.Model):
     
     class Meta:
         ordering = ['last_name', 'first_name']
+        verbose_name = _('author')
+        verbose_name_plural = _('authors')
     
     def display_books(self):
         return ', '.join(book.title for book in self.books.all())
@@ -52,6 +58,8 @@ class Book(models.Model):
     
     class Meta:
         ordering = ['title']
+        verbose_name = _('book')
+        verbose_name_plural = _('books')
 
     def display_genre(self):
         return ', '.join(genre.name for genre in self.genre.all())
@@ -101,6 +109,8 @@ class BookInstance(models.Model):
     
     class Meta:
         ordering = ['due_back']
+        verbose_name = _('book instance')
+        verbose_name_plural = _('book instances')
 
 
 class BookReview(models.Model):
@@ -125,3 +135,5 @@ class BookReview(models.Model):
 
     class Meta:
         ordering = ['-created_at']
+        verbose_name = _('book review')
+        verbose_name_plural = _('book reviews')
