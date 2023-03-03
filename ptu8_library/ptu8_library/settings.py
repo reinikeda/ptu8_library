@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'user_profile',
     # 3 saliu apps'ai
     'tinymce',
+    'rosetta',
     # Django apps'ai
     'django.contrib.admin',
     'django.contrib.auth',
