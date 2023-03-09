@@ -1,0 +1,30 @@
+version: "3.7"
+services:
+  library:
+    build: .
+    image: ptu8_library:dev
+    container_name: ptu8.library
+    restart: always
+    tty: true
+    stdin_open: true
+    ports:
+      - 8000:8000
+    volumes:
+      - ./ptu8_library:/app
+    command: >
+      bash -c "python manage.py migrate &&
+      python manage.py collectstatic --noinput &&
+      gunicorn -b 0.0.0.0:8000 ptu8_library.wsgi"
+
+  nginx:
+    build: ./nginx/
+    image: nginx:library
+    container_name: ptu8.nginx
+    restart: always
+    ports:
+      - 80:80
+    links:
+      - library:library
+    volumes:
+      - ./ptu8_library/static:/app/static
+      - ./ptu8_library/media:/app/media
