@@ -4,6 +4,7 @@ charset-normalizer==3.0.1
 Django==4.1.7
 django-rosetta==0.9.8
 django-tinymce==3.5.0
+gunicorn==20.1.0
 idna==3.4
 Pillow==9.4.0
 polib==1.2.0
