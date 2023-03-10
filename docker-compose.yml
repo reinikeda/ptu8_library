@@ -7,12 +7,17 @@ services:
     restart: always
     tty: true
     stdin_open: true
+    depends_on:
+      - db
+    links:
+      - db:db
     ports:
       - 8000:8000
     volumes:
       - ./ptu8_library:/app
     command: >
-      bash -c "python manage.py migrate &&
+      bash -c "python wait_for_postgres.py &&
+      python manage.py migrate &&
       python manage.py collectstatic --noinput &&
       gunicorn -b 0.0.0.0:8000 ptu8_library.wsgi"
 
@@ -28,3 +33,17 @@ services:
     volumes:
       - ./ptu8_library/static:/app/static
       - ./ptu8_library/media:/app/media
+
+  db:
+    image: postgres
+    container_name: ptu8.postgres
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - ./dbdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ptu8_library
+      POSTGRES_USER: ptu8_library
+      POSTGRES_PASSWORD: nesakysiu
+      POSTGRES_PORT: 5432
